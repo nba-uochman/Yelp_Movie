@@ -36,15 +36,15 @@ try {
 
 // connect to db
 
-try {
-    mongoose.connect(config.db.connection);
-} catch (err) {
-    console.log("You are seeing this error because you are using DB locally");
-    console.log(err);
-    mongoose.connect(process.env.DB_CONNECTION);
-}
+// try {
+//     mongoose.connect(config.db.connection);
+// } catch (err) {
+//     console.log("You are seeing this error because you are using DB locally");
+//     console.log(err);
+//     mongoose.connect(process.env.DB_CONNECTION);
+// }
 // mongoose.connect(config.db.connection);
-// mongoose.connect("mongodb://localhost:27017/fruitDB");
+mongoose.connect(config.db.localConnection);
 
 
 // calls express

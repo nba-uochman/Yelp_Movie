@@ -45,12 +45,15 @@
 
                 </tbody>
             </table>
-            <a href="/movie/<%= movie._id %>/edit" class="w-100">
-                <button class="btn btn-outline-primary w-100 my-2">Edit</button>
-            </a>
-            <form action="/movie/<%= movie._id %>?_method=DELETE" method="POST" class="w-100">
-                <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
-            </form>
+            <% if(ownerId==userId){ %>
+                <a href="/movie/<%= movie._id %>/edit" class="w-100">
+                    <button class="btn btn-outline-primary w-100 my-2">Edit</button>
+                </a>
+                <form action="/movie/<%= movie._id %>?_method=DELETE" method="POST" class="w-100">
+                    <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
+                </form>
+                <% } %>
+
         </div>
     </div>
     <!-- add comment btn -->
@@ -68,21 +71,23 @@
                 <div class=" col-3 my-auto">
                     <%= comment.user.username %>
                 </div>
-                <div class=" col-4 my-auto d-flex flex-column align-items-center">
-                    <a href="/movie/<%= movie._id %>/comments/<%= comment._id %>/edit"
-                        class="btn btn-primary btn-sm mt-1">
-                        <i class="bi bi-pencil-square"></i>
-                    </a>
-                    <form action="/movie/<%= movie._id %>/comments/<%= comment._id %>/delete?_method=DELETE"
-                        method="POST">
-                        <button type="submit" class=" btn btn-danger btn-sm my-1 del-btn">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </form>
-                </div>
-                <div class="col-5 my-auto">
-                    <%= comment.text %>
-                </div>
+                <% if(ownerId==userId){ %>
+                    <div class=" col-4 my-auto d-flex flex-column align-items-center">
+                        <a href="/movie/<%= movie._id %>/comments/<%= comment._id %>/edit"
+                            class="btn btn-primary btn-sm mt-1">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form action="/movie/<%= movie._id %>/comments/<%= comment._id %>/delete?_method=DELETE"
+                            method="POST">
+                            <button type="submit" class=" btn btn-danger btn-sm my-1 del-btn">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <% } %>
+                        <div class="col-5 my-auto">
+                            <%= comment.text %>
+                        </div>
             </div>
             <% }) %>
     </div>

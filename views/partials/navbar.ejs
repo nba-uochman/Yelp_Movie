@@ -10,15 +10,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto m-2">
             <li class="nav-item active">
-                <a href="/" class="nav-link active">Home</a>
+                <a href="/" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="/movie" class="nav-link active">Movies</a>
+                <a href="/movie" class="nav-link">Movies</a>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Dropdown
+                    Genres
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,16 +33,22 @@
                 </div>
 
             </li>
+
+
             <% if (user) { %>
                 <li class="nav-item">
-                    <a href="/logout" class="nav-link active">Log Out</a>
+                    <a href="/movie/new" class="nav-link">Add Movie</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link ">Log Out</a>
                 </li>
                 <% } else { %>
                     <li class="nav-item">
-                        <a href="/signup" class="nav-link active">Sign Up</a>
+                        <a href="/signup" class="nav-link ">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/login" class="nav-link active">Log In</a>
+                        <a href="/login" class="nav-link">Log In</a>
                     </li>
                     <% } %>
         </ul>

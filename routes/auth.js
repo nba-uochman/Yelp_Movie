@@ -18,7 +18,6 @@ router.post("/signup", async (req, res) => {
         }),
             req.body.password
         );
-        console.log(newUser);
 
         passport.authenticate("local")(req, res, () => {
             res.redirect("/movie");

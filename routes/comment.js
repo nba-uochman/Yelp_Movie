@@ -24,7 +24,6 @@ router.post("/", isLoggedIn, async (req, res) => {
     };
 
     await Comment.create(newComment);
-    console.log(newComment)
     res.redirect("/movie/" + req.body.movieId);
 });
 

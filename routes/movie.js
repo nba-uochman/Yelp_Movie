@@ -80,7 +80,8 @@ router.get("/:id", isLoggedIn, async (req, res) => {
 
         const comments = await Comments.find({ movieId: req.params.id }).exec();
 
-        res.render("movie_show", { movie, comments });
+        res.render("movie_show", { movie, comments, ownerId: movie.owner.id, userId: req.user.id });
+        // console.log(movie, req.user.id);
 
     } catch (err) {
         console.log("an error occured " + err)
