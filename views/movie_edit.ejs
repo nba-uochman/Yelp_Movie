@@ -1,0 +1,61 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="container">
+        <h1 class="new-movie-header">Edit Movie</h1>
+
+        <form action="/movie/<%= movie._id %>?_method=PUT" method="POST" class="form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" value="<%= movie.title %>" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea type="text" name="description" placeholder="description"
+                    class="form-control"><%= movie.description %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="actors">Actors</label>
+                <input type="text" name="actors" value="<%= movie.actors %>" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="producer">Producer</label>
+                <input type="text" name="producer" value="<%= movie.producer %>" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <input type="number" name="rating" value="<%= movie.rating %>" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" name="date" value="<%= movie.date %>" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="image">Genre</label>
+                <select name="genre" id="" class="form-control">
+                    <option disabled selected>-- Choose Below --</option>
+                    <option <%=movie.genre==='action' ? 'selected' : "" %> >Action</option>
+                    <option <%=movie.genre==='horror' ? 'selected' : "" %>>Horror</option>
+                    <option <%=movie.genre==='comedy' ? 'selected' : "" %>>Comedy</option>
+                    <option <%=movie.genre==='adventure' ? 'selected' : "" %>>Adventure</option>
+                    <option <%=movie.genre==='sci-fi' ? 'selected' : "" %>>Sci-fi</option>
+                    <option <%=movie.genre==='drama' ? 'selected' : "" %>>Drama</option>
+                    <option <%=movie.genre==='fantasy' ? 'selected' : "" %>>Fantasy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image URL</label>
+                <input type="text" name="image" value="<%= movie.image %>" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary my-3">Submit</button>
+        </form>
+    </div>
+
+    <%- include("partials/footer.ejs") %>

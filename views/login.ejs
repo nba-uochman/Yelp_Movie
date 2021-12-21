@@ -1,0 +1,11 @@
+<%- include ("partials/header.ejs") %>
+    <h1>Log In</h1>
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <input type="text" name="username" placeholder="username" class="form-control" required autofocus>
+            <input type="password" name="password" placeholder="password" class="form-control my-2" required>
+            <button type="submit" class="btn btn-primary ">Log In</button>
+        </div>
+    </form>
+
+    <%- include ("partials/footer.ejs") %>

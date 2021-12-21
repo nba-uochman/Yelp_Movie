@@ -1,0 +1,20 @@
+<%- include("partials/header.ejs") %>
+    <h1 class="text-center">Movies</h1>
+    <div class="wrapper">
+        <% movies.forEach(movie=>{ %>
+            <div class="card">
+                <a href=" /movie/<%= movie._id %>">
+                    <img src="<%= movie.image %>" alt="">
+                </a>
+                <h3 class="card-title">
+                    <%= movie.title %>
+                </h3>
+                <p class="card-description">
+                    <%= movie.description %>
+                </p>
+            </div>
+
+            <% }) %>
+    </div>
+
+    <%- include("partials/footer.ejs") %>

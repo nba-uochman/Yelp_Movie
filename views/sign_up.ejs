@@ -1,0 +1,13 @@
+<%- include ("partials/header.ejs") %>
+    <h1>Sign Up</h1>
+    <form action="/signup" method="POST">
+        <div class="form-group">
+            <input type="email" name="email" placeholder="email" class="form-control" required autofocus>
+            <input type="text" name="username" placeholder="username" class="form-control my-2" required>
+            <input type="password" name="password" placeholder="password" class="form-control" required>
+            <button type="submit" class="btn btn-primary my-3">Sign Up</button>
+        </div>
+    </form>
+
+
+    <%- include ("partials/footer.ejs") %>

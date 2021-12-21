@@ -1,0 +1,17 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="">
+        <form action="/movie/<%= movieId %>/comments" method="Post">
+            <h1>Add New Comment</h1>
+            <div class="form-group">
+                <label for="text">Comment</label>
+                <textarea name="text" id="text" class="form-control" placeholder="enter comment here..." cols="30"
+                    rows="10" required></textarea>
+            </div>
+            <input type="hidden" name="movieId" value="<%= movieId %>">
+
+            <button class="btn btn-primary my-3" type="submit">Comment</button>
+        </form>
+    </div>
+
+    <%- include("partials/footer.ejs") %>

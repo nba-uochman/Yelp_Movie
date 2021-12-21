@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">
+        <img src="/images/popcorn.svg" alt="popcorn" width="50px" height="100px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        arial-controls="navbarsupportedContent" arial-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto m-2">
+            <li class="nav-item active">
+                <a href="/" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="/movie" class="nav-link active">Movies</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Dropdown
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a href="#" class="dropdown-item">Action</a>
+                    <a href="#" class="dropdown-item">Horror </a>
+                    <a href="#" class="dropdown-item">Comedy </a>
+                    <a href="#" class="dropdown-item">Adventure </a>
+                    <a href="#" class="dropdown-item">Sci-fi </a>
+                    <a href="#" class="dropdown-item">Drama </a>
+                    <a href="#" class="dropdown-item">Fantasy </a>
+                    <a href="#" class="dropdown-item">Thriller </a>
+                </div>
+
+            </li>
+            <% if (user) { %>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link active">Log Out</a>
+                </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a href="/signup" class="nav-link active">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link active">Log In</a>
+                    </li>
+                    <% } %>
+        </ul>
+
+        <form action="/movie/search" method="GET" class="d-flex my-2 my-lg-0">
+            <input type="search" name="searchTerm" class="form-control me-2" placeholder="search" aria-label="search">
+            <button class="btn btn-outline-success h-25" type="submit">
+                Search
+            </button>
+        </form>
+
+
+    </div>
+    <!-- </div> -->
+</nav>

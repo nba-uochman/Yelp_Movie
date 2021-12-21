@@ -1,0 +1,88 @@
+<%- include("partials/header.ejs") %>
+    <div class="row my-5 ">
+        <div class="img-container d-flex flex-row d-lg-block justify-content-center  col-lg-6">
+            <img src="<%= movie.image %>">
+        </div>
+        <div class="details-container d-flex flex-column align-items-center d-lg-block col-lg-6">
+            <h1 class="display-1">
+                <%= movie.title %>
+            </h1>
+            <p class="lead">
+                <%= movie.description %>
+            </p>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Actors</th>
+                        <td>
+                            <%= movie.actors %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Producer</th>
+                        <td>
+                            <%= movie.producer %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Ratings</th>
+                        <td>
+                            <%= movie.rating %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            <%= movie.date %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Genre</th>
+                        <td>
+                            <%= movie.genre %>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <a href="/movie/<%= movie._id %>/edit" class="w-100">
+                <button class="btn btn-outline-primary w-100 my-2">Edit</button>
+            </a>
+            <form action="/movie/<%= movie._id %>?_method=DELETE" method="POST" class="w-100">
+                <button class="btn btn-outline-danger w-100" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+    <!-- add comment btn -->
+    <a href="/movie/<%= movie._id %>/comments/new">
+        <button class="btn btn-success btn-md mb-3">Add Comment</button>
+    </a>
+    <!-- comment section -->
+    <div class="jumbotron mb-5">
+        <div>
+            <h3 class="text-muted">COMMENTS</h3>
+        </div>
+
+        <% comments.forEach(comment=> { %>
+            <div class="row border">
+                <div class=" col-3 my-auto">
+                    <%= comment.user.username %>
+                </div>
+                <div class=" col-4 my-auto d-flex flex-column align-items-center">
+                    <a href="/movie/<%= movie._id %>/comments/<%= comment._id %>/edit"
+                        class="btn btn-primary btn-sm mt-1">
+                        Edit
+                    </a>
+                    <form action="/movie/<%= movie._id %>/comments/<%= comment._id %>/delete?_method=DELETE"
+                        method="POST">
+                        <button type="submit" class=" btn btn-danger btn-sm my-1">Delete</button>
+                    </form>
+                </div>
+                <div class="col-5 my-auto">
+                    <%= comment.text %>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+
+    <%- include("partials/footer.ejs") %>
