@@ -72,7 +72,7 @@ div.col-4 a{
 div div a i{
     font-size: 1.2rem;
 }
-div div form button[type="submit"]{
+.del-btn{
     width: 57px;
     font-size: 1.2rem;
 }
