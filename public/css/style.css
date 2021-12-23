@@ -68,6 +68,15 @@ div.col-4 a{
     width: 57.81px;
 }
 
+/* comment btn section */
+div div a i{
+    font-size: 1.2rem;
+}
+div div form button[type="submit"]{
+    width: 57px;
+    font-size: 1.2rem;
+}
+
 
 /* media queries */
 @media screen and (min-width:1000px) {

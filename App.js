@@ -27,10 +27,25 @@ const authRouter = require(__dirname + "/routes/auth");
 
 
 // config import
-const config = require(__dirname + "/config");
+try {
+    var config = require(__dirname + "/config");
+} catch (err) {
+    console.log(err);
+}
+
 
 // connect to db
-mongoose.connect(config.db.connection);
+
+try {
+    mongoose.connect(config.db.connection);
+} catch (err) {
+    console.log("You are seeing this error because you are using DB locally");
+    console.log(err);
+    mongoose.connect(process.env.DB_CONNECTION);
+}
+// mongoose.connect(config.db.connection);
+// mongoose.connect("mongodb://localhost:27017/fruitDB");
+
 
 // calls express
 const app = express();
@@ -47,7 +62,7 @@ app.set("view engine", "ejs");
 
 // express session config
 app.use(expressSession({
-    secret: config.secret,
+    secret: process.env.EXPRESS_SESSION_SECRET || config.expressSession.secret,
     resave: false,
     saveUninitialized: false,
 }));
@@ -83,14 +98,14 @@ app.use("/movie/:id/comments", commentRouter);
 
 // static files
 app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")));
-app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap-icon/icons")));
+app.use("/font", express.static(path.join(__dirname, "node_modules/bootstrap-icons/font")));
 app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
-app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")));
+// app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")));
 
 // **********************
 // LISTEN
 // **********************
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log("server running on port 3000");
 });
