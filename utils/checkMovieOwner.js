@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
             res.redirect(`back`);
         }
     } else {  // if not login redirect to /login
+        req.flash("error", "you have to login or sign-up to access this page");
         res.redirect("/login");
     }
 

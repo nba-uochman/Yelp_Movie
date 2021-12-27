@@ -22,14 +22,14 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a href="#" class="dropdown-item">Action</a>
-                    <a href="#" class="dropdown-item">Horror </a>
-                    <a href="#" class="dropdown-item">Comedy </a>
-                    <a href="#" class="dropdown-item">Adventure </a>
-                    <a href="#" class="dropdown-item">Sci-fi </a>
-                    <a href="#" class="dropdown-item">Drama </a>
-                    <a href="#" class="dropdown-item">Fantasy </a>
-                    <a href="#" class="dropdown-item">Thriller </a>
+                    <a href="/movie/genre/action" class="dropdown-item">Action</a>
+                    <a href="/movie/genre/horror" class="dropdown-item">Horror </a>
+                    <a href="/movie/genre/comedy" class="dropdown-item">Comedy </a>
+                    <a href="/movie/genre/adventure" class="dropdown-item">Adventure </a>
+                    <a href="/movie/genre/sci-fi" class="dropdown-item">Sci-fi </a>
+                    <a href="/movie/genre/drama" class="dropdown-item">Drama </a>
+                    <a href="/movie/genre/fantasy" class="dropdown-item">Fantasy </a>
+                    <a href="/movie/genre/thriller" class="dropdown-item">Thriller </a>
                 </div>
 
             </li>
@@ -64,3 +64,19 @@
     </div>
     <!-- </div> -->
 </nav>
+<div class="container my-3">
+    <%if(successMessage && successMessage.length> 0){%>
+        <div class="alert alert-success alert-dismissible fade show " role="alert">
+            <%= successMessage %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+        </div>
+        <%}%>
+            <%if(errorMessage && errorMessage.length> 0){%>
+                <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                    <%= errorMessage %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                </div>
+                <%}%>
+</div>

@@ -1,20 +1,21 @@
 <%- include("partials/header.ejs") %>
+
     <h1 class="text-center">Movies</h1>
-    <div class="wrapper">
+    <div class="d-flex flex-column align-items-center flex-lg-row justify-content-around flex-wrap pt-2 border-top">
         <% movies.forEach(movie=>{ %>
-            <div class="card">
+            <div class="box">
                 <a href=" /movie/<%= movie._id %>">
                     <img src="<%= movie.image %>" alt="">
                 </a>
-                <h3 class="card-title">
+                <h3 class="box-title">
                     <%= movie.title %>
                 </h3>
-                <p class="card-description">
+                <p class="box-description">
                     <%= movie.description %>
                 </p>
             </div>
-
             <% }) %>
     </div>
+
 
     <%- include("partials/footer.ejs") %>

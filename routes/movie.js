@@ -8,7 +8,6 @@ const checkMovieOwner = require(__dirname + "/../utils/checkMovieOwner");
 
 // render movie page
 router.get("/", async (req, res) => {
-    // console.log(req.user);
     try {
         const movies = await Movie.find();
         res.render("movie", { movies });
@@ -21,7 +20,6 @@ router.get("/", async (req, res) => {
 
 // post new movie to /movie route
 router.post("/", async (req, res) => {
-    console.log(req.user);
     const genre = req.body.genre.toLowerCase();
 
     const newMovie = new Movie({
@@ -41,7 +39,7 @@ router.post("/", async (req, res) => {
 
     try {
         const savedMovie = await newMovie.save();
-        console.log(savedMovie);
+        req.flash("success", "You Have Created A New Movie")
         res.redirect(`/movie/${savedMovie.id}`);
 
     } catch (err) {
@@ -73,6 +71,18 @@ router.get("/search", async (req, res) => {
     }
 });
 
+// search movie by genre
+router.get("/genre/:genreId", async (req, res) => {
+    try {
+        const movies = await Movie.find({ genre: req.params.genreId }).exec();
+        res.render("movie_genre.ejs", { movies });
+        console.log(req.params.genreId);
+    } catch (err) {
+        console.log(err);
+        res.send("CANNOT FIND MOVIE");
+    }
+});
+
 // show a single movie with details => show page
 router.get("/:id", isLoggedIn, async (req, res) => {
     try {
@@ -96,16 +106,6 @@ router.get("/:id/edit", checkMovieOwner, async (req, res) => {
         const movie = await Movie.findById(req.params.id).exec();
         res.render("movie_edit", { movie });
     }
-
-    // try {
-    //     const movie = await Movie.findById(req.params.id).exec();
-    //     console.log(movie.date);
-    //     res.render("movie_edit", { movie });
-    // } catch (err) {
-    //     console.log(err);
-    //     res.send("failed to find...")
-    // }
-
 });
 
 // update route
@@ -125,6 +125,7 @@ router.put("/:id", checkMovieOwner, async (req, res) => {
 
     try {
         await Movie.findByIdAndUpdate(req.params.id, movie, { new: true }).exec();
+        req.flash("success", "Movie Edit Successfully");
         res.redirect(`/movie/${req.params.id}`);
     } catch (err) {
         console.log(err);
@@ -137,6 +138,7 @@ router.put("/:id", checkMovieOwner, async (req, res) => {
 router.delete("/:id", checkMovieOwner, async (req, res) => {
     try {
         await Movie.findByIdAndDelete(req.params.id).exec();
+        req.flash("success", "Movie deleted");
         res.redirect(`/movie`);
 
     } catch (err) {

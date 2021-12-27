@@ -13,7 +13,6 @@ router.get("/new/", function (req, res) {
 
 // shows comments
 router.post("/", isLoggedIn, async (req, res) => {
-    console.log("post route ", req.user);
     const newComment = {
         user: {
             id: req.user._id,
@@ -24,7 +23,9 @@ router.post("/", isLoggedIn, async (req, res) => {
     };
 
     await Comment.create(newComment);
+    req.flash("success", "New Comment Created");
     res.redirect("/movie/" + req.body.movieId);
+    console.log(newComment);
 });
 
 // edit comment route
@@ -34,14 +35,6 @@ router.get("/:commentId/edit", checkCommentOwner, async (req, res) => {
         const foundComment = await Comment.findById(req.params.commentId).exec();
         res.render("comment_edit", { foundComment }); //render edit form
     }
-    // try {
-    //     const foundComment = await Comment.findById(req.params.commentId).exec();
-    //     res.render("comment_edit", { foundComment });
-
-    // } catch (err) {
-    //     console.log(err);
-    //     res.send("failed to load file");
-    // }
 
 });
 
@@ -49,6 +42,7 @@ router.get("/:commentId/edit", checkCommentOwner, async (req, res) => {
 router.put("/:commentId", checkCommentOwner, async (req, res) => {
     try {
         await Comment.findByIdAndUpdate(req.params.commentId, { text: req.body.text }, { new: true }).exec();
+        req.flash("success", "Comment Updated")
         res.redirect(`/movie/${req.params.id}`);
     } catch (err) {
         console.log(err);
@@ -61,6 +55,7 @@ router.put("/:commentId", checkCommentOwner, async (req, res) => {
 router.delete("/:commentId/delete", checkCommentOwner, async (req, res) => {
     try {
         Comment.findByIdAndDelete(req.params.commentId).exec();
+        req.flash("success", "Comment Deleted");
         res.redirect(`/movie/${req.params.id}`);
     } catch (err) {
         console.log(err);

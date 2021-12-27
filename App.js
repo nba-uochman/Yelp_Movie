@@ -9,6 +9,7 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
@@ -36,15 +37,15 @@ try {
 
 // connect to db
 
-// try {
-//     mongoose.connect(config.db.connection);
-// } catch (err) {
-//     console.log("You are seeing this error because you are using DB locally");
-//     console.log(err);
-//     mongoose.connect(process.env.DB_CONNECTION);
-// }
+try {
+    mongoose.connect(config.db.connection);
+} catch (err) {
+    console.log("You are seeing this error because you are using DB locally");
+    console.log(err);
+    mongoose.connect(process.env.DB_CONNECTION);
+}
 // mongoose.connect(config.db.connection);
-mongoose.connect(config.db.localConnection);
+// mongoose.connect(config.db.localConnection);
 
 
 // calls express
@@ -74,10 +75,14 @@ passport.serializeUser(User.serializeUser()); // what data sholud be stored in s
 passport.deserializeUser(User.deserializeUser()); //get the user data from the stored seesion
 passport.use(new LocalStrategy(User.authenticate())); // use the local strategy
 
+// use flash in app
+app.use(flash());
 
 // current user middleware config
 app.use(function (req, res, next) {
     res.locals.user = req.user;
+    res.locals.errorMessage = req.flash("error");
+    res.locals.successMessage = req.flash("success");
     next();
 });
 
@@ -100,7 +105,7 @@ app.use("/movie/:id/comments", commentRouter);
 app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")));
 app.use("/font", express.static(path.join(__dirname, "node_modules/bootstrap-icons/font")));
 app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
-// app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")));
+app.use("/dist", express.static(path.join(__dirname, "node_modules/jquery/dist")));
 
 // **********************
 // LISTEN

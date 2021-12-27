@@ -71,7 +71,7 @@
                 <div class=" col-3 my-auto">
                     <%= comment.user.username %>
                 </div>
-                <% if(ownerId==userId){ %>
+                <% if(user.id==comment.user.id){ %>
                     <div class=" col-4 my-auto d-flex flex-column align-items-center">
                         <a href="/movie/<%= movie._id %>/comments/<%= comment._id %>/edit"
                             class="btn btn-primary btn-sm mt-1">

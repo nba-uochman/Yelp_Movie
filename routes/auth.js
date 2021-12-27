@@ -20,6 +20,7 @@ router.post("/signup", async (req, res) => {
         );
 
         passport.authenticate("local")(req, res, () => {
+            req.flash("success", "You have successfully signed-in");
             res.redirect("/movie");
         });
     } catch (err) {
@@ -37,11 +38,14 @@ router.get("/login", (req, res) => {
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/movie",
     failureRedirect: "/login",
+    successFlash: "you have succcessfully logged-in",
+    failureFlash: "Passward or username not correct!"
 }));
 
 // log out 
 router.get("/logout", (req, res) => {
     req.logout();
+    req.flash("success", "You have logged-out")
     res.redirect("/");
 });
 
