@@ -1,7 +1,9 @@
 <%- include("partials/header.ejs") %>
     <div class="row my-5 ">
-        <div class="img-container d-flex flex-row d-lg-block justify-content-center  col-lg-6">
+        <div class="img-container d-flex flex-column d-lg-block justify-content-center align-items-center  col-lg-6">
             <img src="<%= movie.image %>">
+
+            <a href="" id="watch-thriller-btn" class="btn btn-success my-4">Watch Thriller</a>
         </div>
         <div class="details-container d-flex flex-column align-items-center d-lg-block col-lg-6">
             <h1 class="display-1">
@@ -56,10 +58,28 @@
 
         </div>
     </div>
-    <!-- add comment btn -->
-    <a href="/movie/<%= movie._id %>/comments/new">
-        <button class="btn btn-success btn-md mb-3">Add Comment</button>
-    </a>
+    <div class="row">
+        <!-- add comment btn -->
+        <a href="/movie/<%= movie._id %>/comments/new" class="col-5 col-lg-3">
+            <button class="btn btn-success btn-md mb-3">Add Comment</button>
+        </a>
+        <div class="col-4">
+            <% if(user && movie.upvote.indexOf(user.username)>= 0){ %>
+                <button id="upvote-btn" class="btn btn-success">+</button>
+                <% } else if(user) { %>
+                    <button id="upvote-btn" class="btn btn-outline-success">+</button>
+                    <% } %>
+                        <span id="score" class="mx-2">
+                            <%= movie.upvote.length - movie.downvote.length%>
+                        </span>
+                        <% if(user && movie.downvote.indexOf(user.username)>= 0){ %>
+                            <button id="downvote-btn" class="btn btn-danger">+</button>
+                            <% } else if(user) { %>
+                                <button id="downvote-btn" class="btn btn-outline-danger">+</button>
+                                <% } %>
+
+        </div>
+    </div>
     <!-- comment section -->
     <div class="jumbotron mb-5">
         <div>
@@ -92,4 +112,8 @@
             <% }) %>
     </div>
 
+    <script>
+        const movieId = "<%= movie._id %>";
+    </script>
+    <script src="/js/movie_show.js"></script>
     <%- include("partials/footer.ejs") %>

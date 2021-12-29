@@ -15,7 +15,9 @@ const movieSchema = mongoose.Schema({
             ref: "User"
         },
         username: String,
-    }
+    },
+    upvote: [String],
+    downvote: [String]
 });
 
 movieSchema.index({

@@ -83,6 +83,18 @@ div div a i{
 
 
 /* media queries */
+
+@media screen and (min-width:992px) {
+    /* show page for single movie */
+    #watch-thriller-btn{
+        position: absolute;
+        top: 29rem;
+        left: 1.2rem;
+        width: 273.59px;
+    }
+}
+
+
 @media screen and (min-width:1000px) {
 /* show page for single movie */
 
@@ -93,7 +105,15 @@ div div a i{
 .img-container img{
     position: absolute;
     left: -25px;
+    width: 342px;
 
+}
+
+#watch-thriller-btn{
+    position: absolute;
+    top: 77%;
+    left: -1.55rem;
+    width: 342px;
 }
 
 /* movies index page */

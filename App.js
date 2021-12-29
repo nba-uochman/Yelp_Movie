@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -59,6 +59,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'))
 app.set("view engine", "ejs");
+app.use(express.json({
+    type: ["application/json", "text/plain"]
+}));
 
 
 // express session config
@@ -89,7 +92,7 @@ app.use(function (req, res, next) {
 // **********************
 // DEVELOPMENT
 // **********************
-app.use(morgan("tiny"));
+// app.use(morgan("tiny"));
 
 // seed the DB
 // const seed = require(__dirname + "/utils/seed");
