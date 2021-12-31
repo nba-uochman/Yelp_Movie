@@ -5,6 +5,7 @@ const Movie = require(__dirname + "/../models/movie.js");
 const Comments = require(__dirname + "/../models/comment");
 const isLoggedIn = require(__dirname + "/../utils/isLoggedIn");
 const checkMovieOwner = require(__dirname + "/../utils/checkMovieOwner");
+const config = require(__dirname + "/../config");
 
 
 // render movie page
@@ -174,12 +175,11 @@ router.get("/:id", isLoggedIn, async (req, res) => {
 
 // trailer route
 router.get("/:id/trailer", async (request, response) => {
-    const apikey = "k_fng8k947"
     try {
         const findMovie = await Movie.findById(request.params.id).exec();
         console.log(findMovie.title);
         const expression = findMovie.title
-        const url = `https://imdb-api.com/en/API/SearchMovie/${apikey}/${expression}`;
+        const url = `https://imdb-api.com/en/API/SearchMovie/${config.apikey}/${expression}`;
 
         //  api fetch
         const res = await axios.get(url)
@@ -192,7 +192,7 @@ router.get("/:id/trailer", async (request, response) => {
             console.log(searchedMovie);
             // if any result title is equall to expression
             if (searchedMovie === typedMovie) {
-                const getById = await axios.get(`https://imdb-api.com/en/API/Trailer/${apikey}/${result.id}`);
+                const getById = await axios.get(`https://imdb-api.com/en/API/Trailer/${config.apikey}/${result.id}`);
                 const linkEmbed = getById.data.linkEmbed;
                 console.log(getById.data, linkEmbed);
                 if (linkEmbed === null) {
