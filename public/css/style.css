@@ -81,6 +81,8 @@ div div a i{
     font-size: 1.2rem;
 }
 
+/* movie_trailer page styling */
+
 
 /* media queries */
 
@@ -88,9 +90,9 @@ div div a i{
     /* show page for single movie */
     #watch-thriller-btn{
         position: absolute;
-        top: 29rem;
-        left: 1.2rem;
-        width: 273.59px;
+        top: 63%;
+        left: 2rem;
+        width: 200px;
     }
 }
 
@@ -111,9 +113,9 @@ div div a i{
 
 #watch-thriller-btn{
     position: absolute;
-    top: 77%;
-    left: -1.55rem;
-    width: 342px;
+    top: 83%;
+    /* left: 2rem; */
+    width: 200px;
 }
 
 /* movies index page */

@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs") %>
+    <div class="container">
+        <h1>Trailer Route</h1>
+
+        <!-- <iframe src="linkEmbed%>?width=460" width="460" height="290" scrolling="yes"></iframe> -->
+        <% if(!linkEmbed){ %>
+            <h1>
+                <%= linkEmbedError%>
+            </h1>
+            <% } else if(linkEmbed){ %>
+                <iframe src="<%=linkEmbed%>?autoplay=false&width=480" width="480" height="270" allowfullscreen="true"
+                    mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no">
+                </iframe>
+                <% } %>
+
+
+    </div>
+    <%- include("partials/footer.ejs") %>

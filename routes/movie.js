@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
+const axios = require("axios");
 const Movie = require(__dirname + "/../models/movie.js");
 const Comments = require(__dirname + "/../models/comment");
 const isLoggedIn = require(__dirname + "/../utils/isLoggedIn");
@@ -170,6 +171,43 @@ router.get("/:id", isLoggedIn, async (req, res) => {
     }
 
 });
+
+// trailer route
+router.get("/:id/trailer", async (request, response) => {
+    const apikey = "k_fng8k947"
+    try {
+        const findMovie = await Movie.findById(request.params.id).exec();
+        console.log(findMovie.title);
+        const expression = findMovie.title
+        const url = `https://imdb-api.com/en/API/SearchMovie/${apikey}/${expression}`;
+
+        //  api fetch
+        const res = await axios.get(url)
+        const data = res.data;
+        console.log(data);
+        data.results.forEach(async (result) => {  // iterate through all movie result
+            const typedMovie = expression.toLowerCase()
+            console.log(typedMovie);
+            const searchedMovie = result.title.toLowerCase();
+            console.log(searchedMovie);
+            // if any result title is equall to expression
+            if (searchedMovie === typedMovie) {
+                const getById = await axios.get(`https://imdb-api.com/en/API/Trailer/${apikey}/${result.id}`);
+                const linkEmbed = getById.data.linkEmbed;
+                console.log(getById.data, linkEmbed);
+                if (linkEmbed === null) {
+                    response.render("movie_trailer", { linkEmbed, linkEmbedError: getById.data.errorMessage });
+                } else if (linkEmbed) {
+                    response.render("movie_trailer", { linkEmbed, linkEmbedError: getById.data.errorMessage });
+                }
+            }
+
+        });
+
+    } catch (err) {
+        console.log(err, " cannot fetch");
+    }
+})
 
 // edit route
 router.get("/:id/edit", checkMovieOwner, async (req, res) => {
