@@ -3,12 +3,12 @@
 // **********************
 
 // npm import
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-// const morgan = require("morgan");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -27,27 +27,8 @@ const commentRouter = require(__dirname + "/routes/comment");
 const authRouter = require(__dirname + "/routes/auth");
 
 
-// config import
-// try {
-//     var config = require(__dirname + "/config");
-// } catch (err) {
-//     console.log(err);
-// }
-
-
 // connect to db
-
-try {
-    var config = require(__dirname + "/config");
-    mongoose.connect(config.db.connection);
-} catch (err) {
-    console.log("You are seeing this error because you are using DB locally");
-    console.log(err);
-    mongoose.connect(process.env.DB_CONNECTION);
-}
-// mongoose.connect(config.db.connection);
-// mongoose.connect(config.db.localConnection);
-
+mongoose.connect(process.env.DB_CONNECTION);
 
 // calls express
 const app = express();
@@ -93,11 +74,6 @@ app.use(function (req, res, next) {
 // **********************
 // DEVELOPMENT
 // **********************
-// app.use(morgan("tiny"));
-
-// seed the DB
-// const seed = require(__dirname + "/utils/seed");
-// seed();
 
 // use routes
 app.use(mainRouter);
