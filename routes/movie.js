@@ -5,7 +5,6 @@ const Movie = require(__dirname + "/../models/movie.js");
 const Comments = require(__dirname + "/../models/comment");
 const isLoggedIn = require(__dirname + "/../utils/isLoggedIn");
 const checkMovieOwner = require(__dirname + "/../utils/checkMovieOwner");
-const config = require(__dirname + "/../config");
 
 
 // render movie page
