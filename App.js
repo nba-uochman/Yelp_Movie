@@ -28,16 +28,17 @@ const authRouter = require(__dirname + "/routes/auth");
 
 
 // config import
-try {
-    var config = require(__dirname + "/config");
-} catch (err) {
-    console.log(err);
-}
+// try {
+//     var config = require(__dirname + "/config");
+// } catch (err) {
+//     console.log(err);
+// }
 
 
 // connect to db
 
 try {
+    var config = require(__dirname + "/config");
     mongoose.connect(config.db.connection);
 } catch (err) {
     console.log("You are seeing this error because you are using DB locally");
