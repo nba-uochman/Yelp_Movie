@@ -32,7 +32,7 @@ mongoose.connect(process.env.DB_CONNECTION);
 
 // calls express
 const app = express();
-
+const port = process.env.PORT || 3000;
 // **********************
 // CONFIG
 // **********************
@@ -91,6 +91,6 @@ app.use("/dist", express.static(path.join(__dirname, "node_modules/jquery/dist")
 // LISTEN
 // **********************
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log("server running on port 3000");
+app.listen(port, function () {
+    console.log(`server running on port ${port}`);
 });
